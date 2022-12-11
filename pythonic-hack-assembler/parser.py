@@ -12,7 +12,7 @@ class Parser:
             return self._symbol(expression[1:])
         else:
             subexpressions = self._get_subexpressions(expression)
-            return self._convert_subs_to_binary_expression(subexpressions)
+            return '1111' + self._convert_subs_to_binary_expression(subexpressions)
 
     def _convert_subs_to_binary_expression(self, subexpressions):
         binary_comp = self.code.comp(subexpressions[0])

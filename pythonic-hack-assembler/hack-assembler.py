@@ -12,7 +12,7 @@ class HackAssembler:
 
 
     def assemble(self):
-        # TODO: for line in self.file_content
+        pass
 
    def _read_file(self, file_path):
         input_file = open(file_path, "r")
