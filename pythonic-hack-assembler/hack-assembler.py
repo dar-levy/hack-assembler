@@ -1,7 +1,5 @@
-import os.path
+import os
 from parser import Parser
-from symbol_table import SymbolTable
-
 
 class HackAssembler:
     def __init__(self, input_file_path):
@@ -9,7 +7,6 @@ class HackAssembler:
         self.binary_file_content = []
         self.file_content = _read_file(input_file_path)
         self.output_file_path = os.path.dirname(input_file_path)
-
 
     def assemble(self):
         current_index = 0
