@@ -18,15 +18,15 @@ class HackAssembler:
                     self.binary_file_content.append(binary_line)
                     current_index += 1
 
-    def _write_to_file(self):
-        with open(self.output_file_path, 'w') as output_file:
-            output_file.write('\n'.join(self.binary_file_content))
-
-        output_file.close()
-
     def _read_file(self, file_path):
         with open(file_path, "r") as input_file:
             lines = input_file.readlines()
 
         input_file.close()
         return lines
+
+    def _write_to_file(self):
+        with open(self.output_file_path, 'w') as output_file:
+            output_file.write('\n'.join(self.binary_file_content))
+
+        output_file.close()

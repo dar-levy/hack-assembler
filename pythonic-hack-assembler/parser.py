@@ -18,15 +18,15 @@ class Parser:
             return '1111' + self._convert_subs_to_binary_expression(subexpressions)
 
     def _convert_subs_to_binary_expression(self, subexpressions):
-        binary_comp = self.code.comp(subexpressions[0])
-        binary_dest = self.code.dest(subexpressions[1])
-        binary_jump = self.code.jump(subexpressions[2])
+        binary_comp = self._comp(subexpressions[0])
+        binary_dest = self._dest(subexpressions[1])
+        binary_jump = self._jump(subexpressions[2])
 
         return binary_comp + binary_dest + binary_jump
 
     def _get_subexpressions(self, expression):
         expression.replace(" ", "")
-        subexpressions = expression.split('=|;', expression)
+        subexpressions = expression.split('=|;')
         if len(subexpressions) < 3:
             subexpressions.append('null')
 
@@ -43,10 +43,10 @@ class Parser:
             return '{0:016b}'.format(address)
 
     def _dest(self, sub_expression):
-        return self.code.dest(sub_expression)
+        return self.code.get_dest(sub_expression)
 
     def _comp(self, sub_expression):
-        return self.code.comp(sub_expression)
+        return self.code.get_comp(sub_expression)
 
     def _jump(self, sub_expression):
-        return self.code.jump(sub_expression)
+        return self.code.get_jump(sub_expression)

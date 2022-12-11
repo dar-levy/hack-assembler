@@ -41,11 +41,11 @@ class Code:
             'JMP': '111',
         }
 
-    def comp(self, expression):
+    def get_comp(self, expression):
         return self.comp[str(expression)] if expression in self.comp else '1000000'
 
-    def dest(self, expression):
+    def get_dest(self, expression):
         return self.dest[str(expression)] if expression in self.dest else '000'
 
-    def jump(self, expression):
+    def get_jump(self, expression):
         return self.jump[str(expression)] if expression in self.jump else '000'
