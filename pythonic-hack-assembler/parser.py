@@ -7,8 +7,11 @@ class Parser:
         self.code = Code()
         self.symbol_table = SymbolTable()
 
-    def parse(self, expression):
-        if self._instruction_type(expression) == 'a':
+    def parse(self, expression, address):
+        if '(' in expression:
+            self.symbol_table.add_entry(expression[1:-1], address)
+            return -1
+        elif self._instruction_type(expression) == 'a':
             return self._symbol(expression.replace("@", ""))
         else:
             subexpressions = self._get_subexpressions(expression)

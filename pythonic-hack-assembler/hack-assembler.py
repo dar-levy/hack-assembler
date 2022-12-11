@@ -1,6 +1,6 @@
 import os.path
-
 from parser import Parser
+from symbol_table import SymbolTable
 
 
 class HackAssembler:
@@ -12,7 +12,13 @@ class HackAssembler:
 
 
     def assemble(self):
-        pass
+        current_index = 0
+        for line in self.file_content:
+            if not line.strip() or '//' not in line:
+                binary_line = self.parser.parse(line, current_index)
+                if binary_line != -1:
+                    self.binary_file_content.append(binary_line)
+                    current_index += 1
 
    def _read_file(self, file_path):
         input_file = open(file_path, "r")
@@ -20,4 +26,3 @@ class HackAssembler:
         input_file.close()
 
         return lines
-
