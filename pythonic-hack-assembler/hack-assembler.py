@@ -5,8 +5,8 @@ from parser import Parser
 class HackAssembler:
     def __init__(self, input_file_path):
         self.parser = Parser()
-        self.file_content = self._read_file(input_file_path)
         self.binary_file_content = []
+        self.file_content = self._read_file(input_file_path)
         self.output_file_path = os.path.dirname(input_file_path) + '\\output_file.hack'
 
     def assemble(self):
