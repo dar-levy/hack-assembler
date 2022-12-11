@@ -12,7 +12,7 @@ class Parser:
             self.symbol_table.add_entry(expression[1:-1], address)
             return -1
         elif self._instruction_type(expression) == 'a':
-            return self._symbol(expression.replace("@", ""))
+            return self._symbol(expression.replace("@", ""), address)
         else:
             subexpressions = self._get_subexpressions(expression)
             return '1111' + self._convert_subs_to_binary_expression(subexpressions)
