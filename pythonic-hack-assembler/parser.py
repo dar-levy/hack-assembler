@@ -9,7 +9,7 @@ class Parser:
 
     def parse(self, expression):
         if self._instruction_type(expression) == 'a':
-            return self._symbol(expression[1:])
+            return self._symbol(expression.replace("@", ""))
         else:
             subexpressions = self._get_subexpressions(expression)
             return '1111' + self._convert_subs_to_binary_expression(subexpressions)
