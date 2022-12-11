@@ -13,7 +13,7 @@ class Parser:
             self.symbol_table.add_entry(expression[1:-1], address)
             return -1
         elif self._instruction_type(expression) == 'a':
-            return '0000' + self._symbol(expression.replace("@", ""), address)
+            return '0000' + self._symbol(expression, address)
         else:
             subexpressions = self._get_subexpressions(expression)
             return '1111' + self._convert_subs_to_binary_expression(subexpressions) if 'M' in subexpressions[
@@ -38,8 +38,8 @@ class Parser:
         return 'a' if instruction[0] == '@' else 'c'
 
     def _symbol(self, symbol, address):
-        if self.symbol_table.contains(symbol):
-            return '{0:012b}'.format(self.symbol_table.get_address(symbol))
+        if self.symbol_table.contains(symbol.replace('@', '')):
+            return '{0:012b}'.format(self.symbol_table.get_address(symbol.replace('@', '')))
         else:
             self.symbol_table.add_entry(symbol, address)
             return '{0:012b}'.format(address)

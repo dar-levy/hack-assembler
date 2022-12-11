@@ -1,5 +1,6 @@
 class SymbolTable:
     def __init__(self):
+        self.current_available_address = 16
         self.data = {
             'R0': 0,
             'R1': 1,
@@ -43,7 +44,10 @@ class SymbolTable:
         }
 
     def add_entry(self, symbol, address):
-        if not self.contains(symbol):
+        if not self.contains(symbol) and '@' in symbol:
+            self.data[symbol.replace('@', '')] = self.current_available_address
+            self.current_available_address += 1
+        else:
             self.data[str(symbol)] = address
 
     def contains(self, symbol):
