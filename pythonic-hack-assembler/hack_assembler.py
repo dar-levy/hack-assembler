@@ -7,20 +7,22 @@ class HackAssembler:
         self.parser = Parser()
         self.binary_file_content = []
         self.file_content = self._read_file(input_file_path)
-        self.output_file_path = os.path.dirname(input_file_path) + '\\output_file.hack'
+        self.output_file_path = os.path.splitext(input_file_path)[0] + '.hack'
 
     def assemble(self):
         current_index = 0
         for line in self.file_content:
-            if line != "\n" and '//' not in line:
+            if line != '' and '/' not in line:
                 binary_line = self.parser.parse(line, current_index)
                 if binary_line != -1:
                     self.binary_file_content.append(binary_line)
                     current_index += 1
 
+        self._write_to_file()
+
     def _read_file(self, file_path):
         with open(file_path, "r") as input_file:
-            lines = input_file.readlines()
+            lines = input_file.read().splitlines()
 
         input_file.close()
         return lines

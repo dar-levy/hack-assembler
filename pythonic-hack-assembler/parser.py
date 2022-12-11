@@ -1,5 +1,6 @@
 from code_generator import CodeGenerator
 from symbol_table import SymbolTable
+import re
 
 
 class Parser:
@@ -26,7 +27,7 @@ class Parser:
 
     def _get_subexpressions(self, expression):
         expression.replace(" ", "")
-        subexpressions = expression.split('=|;')
+        subexpressions = re.split('=|;', expression)
         if len(subexpressions) < 3:
             subexpressions.append('null')
 
