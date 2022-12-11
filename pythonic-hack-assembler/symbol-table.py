@@ -28,12 +28,11 @@ class SymbolTable:
         }
 
     def add_entry(self, symbol, address):
-        self.data[f'{symbol}'] = address
+        if not self.contains(symbol):
+            self.data[str(symbol)] = address
 
     def contains(self, symbol):
-        if symbol in self.data:
-            return True
-        return False
+        return True if symbol in self.data else False
 
     def get_address(self, symbol):
-        return self.data[f'{symbol}']
+        return self.data[str(symbol)]
