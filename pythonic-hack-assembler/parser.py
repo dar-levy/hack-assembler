@@ -1,10 +1,10 @@
-from code import Code
+from code_generator import CodeGenerator
 from symbol_table import SymbolTable
 
 
 class Parser:
     def __init__(self):
-        self.code = Code()
+        self.code = CodeGenerator()
         self.symbol_table = SymbolTable()
 
     def parse(self, expression, address):

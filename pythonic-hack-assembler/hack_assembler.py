@@ -12,7 +12,7 @@ class HackAssembler:
     def assemble(self):
         current_index = 0
         for line in self.file_content:
-            if not line.strip() or '//' not in line:
+            if line != "\n" and '//' not in line:
                 binary_line = self.parser.parse(line, current_index)
                 if binary_line != -1:
                     self.binary_file_content.append(binary_line)

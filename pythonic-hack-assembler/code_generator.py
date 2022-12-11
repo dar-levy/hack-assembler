@@ -1,4 +1,4 @@
-class Code:
+class CodeGenerator:
     def __init__(self):
         self.comp = {
             '0': '101010',
