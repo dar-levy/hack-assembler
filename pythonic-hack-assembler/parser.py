@@ -16,7 +16,8 @@ class Parser:
             return self._symbol(expression.replace("@", ""), address)
         else:
             subexpressions = self._get_subexpressions(expression)
-            return '1111' + self._convert_subs_to_binary_expression(subexpressions)
+            return '1111' + self._convert_subs_to_binary_expression(subexpressions) if 'M' in subexpressions[
+                1] else '1110' + self._convert_subs_to_binary_expression(subexpressions)
 
     def _convert_subs_to_binary_expression(self, subexpressions):
         binary_comp = self._comp(subexpressions[0])
@@ -38,7 +39,7 @@ class Parser:
 
     def _symbol(self, symbol, address):
         if self.symbol_table.contains(symbol):
-            return '{0:016b}'.format(self.symbol_table[str(symbol)])
+            return '{0:016b}'.format(self.symbol_table.get_address(symbol))
         else:
             self.symbol_table.add_entry(symbol, address)
             return '{0:016b}'.format(address)

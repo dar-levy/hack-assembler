@@ -1,8 +1,10 @@
+import sys
 from hack_assembler import HackAssembler
 
 
 def main():
     file_path = "/Users/darlevy/PycharmProjects/hack-assembler/pythonic-hack-assembler/Add.asm"
+    # hack_assembler = HackAssembler(sys.argv[1])
     hack_assembler = HackAssembler(file_path)
     hack_assembler.assemble()
 
