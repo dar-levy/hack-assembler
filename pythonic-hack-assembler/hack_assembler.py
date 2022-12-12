@@ -20,10 +20,14 @@ class HackAssembler:
                              line.strip() != '' and line.split('/')[0].strip() != '']
 
     def _add_label_symbols_to_table(self):
+        labels = []
         for line_number, line in enumerate(self.file_content):
             if '(' in line:
                 self.parser.parse(line, line_number)
-                self.file_content.remove(line)
+                # self.file_content.remove(line)
+                labels.append(line)
+
+        self.file_content = [line for line in self.file_content if line not in labels]
 
     def _convert_to_binary(self):
         for line_num, line in enumerate(self.file_content):

@@ -3,7 +3,7 @@ from hack_assembler import HackAssembler
 
 
 def main():
-    file_path = "/Users/darlevy/PycharmProjects/hack-assembler/pythonic-hack-assembler/Rect.asm"
+    file_path = "/Users/darlevy/PycharmProjects/hack-assembler/pythonic-hack-assembler/Pong.asm"
     hack_assembler = HackAssembler(file_path)
     hack_assembler.assemble()
 
