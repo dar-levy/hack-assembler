@@ -1,4 +1,4 @@
-class Code:
+class CodeGenerator:
     def __init__(self):
         self.comp = {
             '0': '101010',
@@ -18,13 +18,23 @@ class Code:
             'D-A': '010011',
             'A-D': '000111',
             'D&A': '000000',
-            'D|A': '010101'
+            'D|A': '010101',
+            'M': '110000',
+            '!M': '110001',
+            '-M': '110011',
+            'M+1': '110111',
+            'M-1': '110010',
+            'D+M': '000010',
+            'D-M': '010011',
+            'M-D': '000111',
+            'D&M': '000000',
+            'D|M': '010101',
         }
 
         self.dest = {
             'M': '001',
             'D': '010',
-            'DM': '011',
+            'MD': '011',
             'A': '100',
             'AM': '101',
             'AD': '110',
@@ -41,11 +51,11 @@ class Code:
             'JMP': '111',
         }
 
-    def comp(self, expression):
-        return self.comp[str(expression)] if expression in self.comp else '1000000'
+    def get_comp(self, expression):
+        return self.comp[expression]
 
-    def dest(self, expression):
-        return self.dest[str(expression)] if expression in self.dest else '000'
+    def get_dest(self, expression):
+        return self.dest[expression] if expression in self.dest else '000'
 
-    def jump(self, expression):
-        return self.jump[str(expression)] if expression in self.jump else '000'
+    def get_jump(self, expression):
+        return self.jump[expression] if expression in self.jump else '000'

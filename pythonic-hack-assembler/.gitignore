@@ -1,1 +1,5 @@
 .idea
+__pycache__/
+*.asm
+*.hack
+*.DS_STORE
