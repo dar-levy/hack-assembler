@@ -3,7 +3,8 @@ from hack_assembler import HackAssembler
 
 
 def main():
-    hack_assembler = HackAssembler(sys.argv[1])
+    file_path = "/Users/darlevy/PycharmProjects/hack-assembler/pythonic-hack-assembler/Max.asm"
+    hack_assembler = HackAssembler(file_path)
     hack_assembler.assemble()
 
 

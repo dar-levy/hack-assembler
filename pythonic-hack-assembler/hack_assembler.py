@@ -14,7 +14,7 @@ class HackAssembler:
         for line in self.file_content:
             if '/' in line:
                 line = line.split('/')[0]
-                if line != '':
+                if line.strip() != '':
                     binary_line = self.parser.parse(line, current_index)
                     if binary_line != -1:
                         self.binary_file_content.append(binary_line)
