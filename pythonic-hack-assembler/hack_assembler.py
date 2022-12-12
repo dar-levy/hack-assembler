@@ -10,17 +10,26 @@ class HackAssembler:
         self.output_file_path = os.path.splitext(input_file_path)[0] + '.hack'
 
     def assemble(self):
+        self._clean_file()
+        self._add_label_symbols_to_table()
+        self._convert_to_binary()
+        self._write_to_file()
+
+    def _clean_file(self):
+        self.file_content = [line.split('/')[0].strip() for line in self.file_content if
+                             line.strip() != '' and line.split('/')[0].strip() != '']
+
+    def _add_label_symbols_to_table(self):
         current_index = 0
         for line in self.file_content:
-            if '/' in line:
-                line = line.split('/')[0]
-                if line.strip() != '':
-                    binary_line = self.parser.parse(line, current_index)
-                    if binary_line != -1:
-                        self.binary_file_content.append(binary_line)
-                        current_index += 1
+            if '(' in line:
+                self.parser.parse(line, current_index)
+                self.file_content.remove(line)
 
-        self._write_to_file()
+    def _convert_to_binary(self):
+        for line_num, line in enumerate(self.file_content):
+            binary_line = self.parser.parse(line, line_num)
+            self.binary_file_content.append(binary_line)
 
     def _read_file(self, file_path):
         with open(file_path, "r") as input_file:

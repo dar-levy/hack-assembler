@@ -44,11 +44,13 @@ class SymbolTable:
         }
 
     def add_entry(self, symbol, address):
-        if not self.contains(symbol) and '@' in symbol:
+        if (not self.contains(symbol)) and '@' in symbol:
             self.data[symbol.replace('@', '')] = self.current_available_address
             self.current_available_address += 1
+        elif '(' in symbol:
+            self.data[symbol[1:-1]] = address
         else:
-            self.data[str(symbol)] = address
+            self.data[symbol] = address
 
     def contains(self, symbol):
         return True if symbol in self.data else False
