@@ -23,8 +23,7 @@ class HackAssembler:
         labels = []
         for line_number, line in enumerate(self.file_content):
             if '(' in line:
-                self.parser.parse(line, line_number)
-                # self.file_content.remove(line)
+                self.parser.parse(line, line_number - len(labels))
                 labels.append(line)
 
         self.file_content = [line for line in self.file_content if line not in labels]
