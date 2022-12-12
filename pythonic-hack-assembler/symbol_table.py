@@ -45,8 +45,11 @@ class SymbolTable:
 
     def add_entry(self, symbol, address):
         if (not self.contains(symbol.replace('@', ''))) and '@' in symbol:
-            self.data[symbol.replace('@', '')] = self.current_available_address
-            self.current_available_address += 1
+            if symbol.replace('@', '').isnumeric():
+                self.data[symbol.replace('@', '')] = int(symbol.replace('@', ''))
+            else:
+                self.data[symbol.replace('@', '')] = self.current_available_address
+                self.current_available_address += 1
         elif '(' in symbol:
             self.data[symbol[1:-1]] = address
 

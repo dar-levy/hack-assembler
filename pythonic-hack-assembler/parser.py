@@ -46,7 +46,7 @@ class Parser:
             return '{0:016b}'.format(self.symbol_table.get_address(symbol.replace('@', '')))
         else:
             self.symbol_table.add_entry(symbol, address)
-            return '{0:016b}'.format(address)
+            return '{0:016b}'.format(self.symbol_table.get_address(symbol.replace('@', '')))
 
     def _dest(self, sub_expression):
         return self.code.get_dest(sub_expression)
