@@ -52,7 +52,7 @@ class CodeGenerator:
         }
 
     def get_comp(self, expression):
-        return self.comp[expression] if expression in self.comp else '000000'
+        return self.comp[expression]
 
     def get_dest(self, expression):
         return self.dest[expression] if expression in self.dest else '000'

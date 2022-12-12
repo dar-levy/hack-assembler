@@ -28,9 +28,13 @@ class Parser:
 
     def _get_subexpressions(self, expression):
         expression.replace(" ", "")
-        subexpressions = re.split('=|;', expression)
-        if len(subexpressions) < 3:
-            subexpressions.append('null')
+        subexpressions = ['null', 'null', 'null']
+        if '=' not in expression and ';' in expression:
+            subexpressions[1:2] = expression.split(';')
+        elif ';' not in expression and '=' in expression:
+            subexpressions[0:1] = expression.split('=')
+        else:
+            subexpressions = re.split('=|;', expression)
 
         return subexpressions
 
