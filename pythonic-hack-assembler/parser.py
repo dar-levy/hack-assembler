@@ -22,7 +22,7 @@ class Parser:
         binary_dest = self._dest(subexpressions[0])
         binary_comp = self._comp(subexpressions[1])
         binary_jump = self._jump(subexpressions[2])
-        a = '1' if 'M' in binary_comp else '0'
+        a = '1' if 'M' in subexpressions[1] else '0'
 
         return '111' + a + binary_comp + binary_dest + binary_jump
 
