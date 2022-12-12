@@ -12,11 +12,13 @@ class HackAssembler:
     def assemble(self):
         current_index = 0
         for line in self.file_content:
-            if line != '' and '/' not in line:
-                binary_line = self.parser.parse(line, current_index)
-                if binary_line != -1:
-                    self.binary_file_content.append(binary_line)
-                    current_index += 1
+            if '/' in line:
+                line = line.split('/')[0]
+                if line != '':
+                    binary_line = self.parser.parse(line, current_index)
+                    if binary_line != -1:
+                        self.binary_file_content.append(binary_line)
+                        current_index += 1
 
         self._write_to_file()
 
