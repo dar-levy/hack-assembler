@@ -10,21 +10,21 @@ class Parser:
 
     def parse(self, expression, address):
         if '(' in expression:
-            self.symbol_table.add_entry(expression[1:-1], address)
+            self.symbol_table.add_entry(expression, address)
             return -1
         elif self._instruction_type(expression) == 'a':
-            return '0000' + self._symbol(expression, address)
+            return self._symbol(expression, address)
         else:
             subexpressions = self._get_subexpressions(expression)
-            return '1111' + self._convert_subs_to_binary_expression(subexpressions) if 'M' in subexpressions[
-                1] else '1110' + self._convert_subs_to_binary_expression(subexpressions)
+            return self._convert_c_instruction_to_binary(subexpressions)
 
-    def _convert_subs_to_binary_expression(self, subexpressions):
+    def _convert_c_instruction_to_binary(self, subexpressions):
         binary_dest = self._dest(subexpressions[0])
         binary_comp = self._comp(subexpressions[1])
         binary_jump = self._jump(subexpressions[2])
+        a = '1' if 'M' in binary_comp else '0'
 
-        return binary_comp + binary_dest + binary_jump
+        return '111' + a + binary_comp + binary_dest + binary_jump
 
     def _get_subexpressions(self, expression):
         expression.replace(" ", "")
@@ -39,10 +39,10 @@ class Parser:
 
     def _symbol(self, symbol, address):
         if self.symbol_table.contains(symbol.replace('@', '')):
-            return '{0:012b}'.format(self.symbol_table.get_address(symbol.replace('@', '')))
+            return '{0:016b}'.format(self.symbol_table.get_address(symbol.replace('@', '')))
         else:
             self.symbol_table.add_entry(symbol, address)
-            return '{0:012b}'.format(address)
+            return '{0:016b}'.format(address)
 
     def _dest(self, sub_expression):
         return self.code.get_dest(sub_expression)
